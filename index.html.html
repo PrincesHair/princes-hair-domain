@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="PRINCE'S HAIR DOMAIN — Precision cuts, clean fades, sharp lines.">
+<title>PRINCE'S HAIR DOMAIN | Premium Barbershop</title>
+<style>
+  :root{
+    --bg:#090909; --bg2:#111111; --card:#151515; --gold:#d5a43a;
+    --gold-light:#f0c65f; --text:#f4f4f4; --muted:#b5b5b5; --line:#303030;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+  a{text-decoration:none;color:inherit}
+  .container{width:min(1120px,92%);margin:auto}
+  .section{padding:90px 0}
+  .eyebrow{color:var(--gold);letter-spacing:4px;font-size:.75rem;font-weight:bold;text-transform:uppercase}
+  .section-title{font-family:Georgia,serif;font-size:clamp(2rem,4vw,3.5rem);margin:8px 0 14px}
+  .section-intro{color:var(--muted);max-width:620px;margin:auto}
+  .center{text-align:center}
+
+  /* Header */
+  header{position:sticky;top:0;z-index:100;background:rgba(9,9,9,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
+  .nav{height:78px;display:flex;align-items:center;justify-content:space-between}
+  .brand{display:flex;align-items:center;gap:11px}
+  .logo{width:48px;height:48px;border:2px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold);font:bold 1.6rem Georgia,serif;position:relative}
+  .brand strong{font-family:Georgia,serif;font-size:1.15rem;letter-spacing:1px}
+  .brand span{display:block;color:var(--gold);font-size:.66rem;letter-spacing:3px}
+  nav{display:flex;gap:25px;align-items:center;font-size:.85rem;font-weight:bold}
+  nav a{color:#ddd;transition:.25s}
+  nav a:hover{color:var(--gold)}
+  .menu-btn{display:none;background:none;border:0;color:white;font-size:1.5rem}
+
+  /* Hero */
+  .hero{min-height:690px;display:grid;align-items:center;position:relative;overflow:hidden;
+    background:linear-gradient(90deg,rgba(0,0,0,.92) 0%,rgba(0,0,0,.78) 43%,rgba(0,0,0,.20) 100%),
+    url("https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1800&q=85") center/cover}
+  .hero-content{padding:90px 0}
+  .hero h1{font-family:Georgia,serif;font-size:clamp(3.2rem,7vw,6.7rem);line-height:.94;max-width:720px;margin:16px 0 24px}
+  .hero h1 span{color:var(--gold)}
+  .hero p{max-width:580px;color:#ddd;font-size:1.08rem;margin-bottom:30px}
+  .buttons{display:flex;flex-wrap:wrap;gap:14px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;padding:15px 25px;border:1px solid var(--gold);font-weight:bold;font-size:.8rem;letter-spacing:.6px;text-transform:uppercase;cursor:pointer;transition:.25s}
+  .btn-primary{background:var(--gold);color:#151515}
+  .btn-primary:hover{background:var(--gold-light);transform:translateY(-2px)}
+  .btn-outline{color:white;background:transparent}
+  .btn-outline:hover{background:var(--gold);color:#111}
+
+  /* Services */
+  .services{background:var(--bg2)}
+  .service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:45px}
+  .service-card{background:var(--card);border:1px solid var(--line);padding:28px;transition:.3s}
+  .service-card:hover{transform:translateY(-6px);border-color:var(--gold)}
+  .icon{width:52px;height:52px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold);font-size:1.4rem;margin-bottom:18px}
+  .service-card h3{margin-bottom:6px}
+  .service-card p{color:var(--muted);font-size:.9rem}
+  .price{display:block;color:var(--gold-light);font-weight:bold;font-size:1.2rem;margin-top:15px}
+
+  /* About */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:65px;align-items:center}
+  .about-photo{min-height:500px;background:
+    linear-gradient(rgba(0,0,0,.08),rgba(0,0,0,.4)),
+    url("https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=1000&q=85") center/cover}
+  .about-text p{color:var(--muted);margin:16px 0}
+  .signature{font:italic 2rem Georgia,serif;color:var(--gold);margin-top:25px}
+
+  /* Gallery */
+  .gallery{background:var(--bg2)}
+  .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:40px}
+  .gallery-item{height:250px;background-size:cover;background-position:center;border:1px solid var(--line);transition:.3s}
+  .gallery-item:hover{transform:scale(1.02);border-color:var(--gold)}
+  .g1{background-image:url("https://images.unsplash.com/photo-1512690459411-b9245aed614b?auto=format&fit=crop&w=900&q=80")}
+  .g2{background-image:url("https://images.unsplash.com/photo-1520339322292-5a3e93a36b9e?auto=format&fit=crop&w=900&q=80")}
+  .g3{background-image:url("https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=900&q=80")}
+  .g4{background-image:url("https://images.unsplash.com/photo-1517832606299-7ae9b720a186?auto=format&fit=crop&w=900&q=80")}
+  .g5{background-image:url("https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&w=900&q=80")}
+  .g6{background-image:url("https://images.unsplash.com/photo-1567894340315-735d7c361db0?auto=format&fit=crop&w=900&q=80")}
+
+  /* Booking */
+  .booking-wrap{background:linear-gradient(135deg,#17130b,#0d0d0d);border:1px solid #423617;padding:45px;margin-top:40px}
+  .booking-form{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:28px}
+  input,select,textarea{width:100%;background:#0d0d0d;border:1px solid #383838;color:white;padding:15px;font:inherit;outline:none}
+  input:focus,select:focus,textarea:focus{border-color:var(--gold)}
+  select option{background:#111}
+  .full{grid-column:1/-1}
+  .form-message{margin-top:18px;display:none;padding:12px;border:1px solid var(--gold);color:var(--gold-light)}
+
+  /* Contact */
+  .contact-grid{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:35px}
+  .contact-card h3{color:var(--gold);margin-bottom:15px}
+  .contact-card p{color:var(--muted);margin:7px 0;font-size:.93rem}
+  footer{border-top:1px solid var(--line);padding:28px 0;color:#888;text-align:center;font-size:.82rem}
+
+  @media(max-width:800px){
+    .menu-btn{display:block}
+    nav{display:none;position:absolute;left:0;right:0;top:78px;background:#0d0d0d;border-bottom:1px solid var(--line);padding:18px 4%;flex-direction:column;align-items:flex-start}
+    nav.show{display:flex}
+    .service-grid{grid-template-columns:repeat(2,1fr)}
+    .about-grid,.contact-grid{grid-template-columns:1fr}
+    .about-photo{min-height:360px}
+    .gallery-grid{grid-template-columns:repeat(2,1fr)}
+  }
+  @media(max-width:520px){
+    .hero{min-height:630px}
+    .service-grid,.gallery-grid,.booking-form{grid-template-columns:1fr}
+    .full{grid-column:auto}
+    .brand strong{font-size:.95rem}
+    .section{padding:70px 0}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a class="brand" href="#home">
+      <div class="logo">P</div>
+      <div><strong>PRINCE'S</strong><span>HAIR DOMAIN</span></div>
+    </a>
+    <button class="menu-btn" aria-label="Open menu">☰</button>
+    <nav id="navlinks">
+      <a href="#home">HOME</a>
+      <a href="#services">SERVICES</a>
+      <a href="#about">ABOUT US</a>
+      <a href="#gallery">GALLERY</a>
+      <a href="#booking">BOOK NOW</a>
+      <a href="#contact">CONTACT</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <div class="container hero-content">
+    <div class="eyebrow">Welcome To</div>
+    <h1>PRINCE'S<br><span>HAIR DOMAIN</span></h1>
+    <p>Your Style. Your Confidence. Our Craft. Experience precision cuts, clean fades, sharp lines, and a style made specifically for you.</p>
+    <div class="buttons">
+      <a class="btn btn-primary" href="#booking">Book an Appointment</a>
+      <a class="btn btn-outline" href="#services">View Services</a>
+    </div>
+  </div>
+</section>
+
+<section class="section services" id="services">
+  <div class="container">
+    <div class="center">
+      <div class="eyebrow">Look Sharp. Feel Confident.</div>
+      <h2 class="section-title">OUR SERVICES</h2>
+      <p class="section-intro">Professional grooming and modern styles delivered with attention to every detail.</p>
+    </div>
+    <div class="service-grid">
+      <article class="service-card"><div class="icon">✂</div><h3>Classic Haircut</h3><p>A clean, precise cut tailored to your preferred style.</p><span class="price">$20</span></article>
+      <article class="service-card"><div class="icon">◐</div><h3>Skin Fade</h3><p>Sharp blending and a smooth finish for a modern look.</p><span class="price">$25</span></article>
+      <article class="service-card"><div class="icon">♛</div><h3>Beard Trim</h3><p>Shape, detail and groom your beard to perfection.</p><span class="price">$15</span></article>
+      <article class="service-card"><div class="icon">✦</div><h3>Hair Wash</h3><p>Refresh and prepare your hair for the perfect finish.</p><span class="price">$10</span></article>
+      <article class="service-card"><div class="icon">★</div><h3>Kids' Haircut</h3><p>Patient, stylish cuts for our younger clients.</p><span class="price">$15</span></article>
+      <article class="service-card"><div class="icon">◆</div><h3>Hair Coloring</h3><p>Professional color services to create a bold new look.</p><span class="price">From $30</span></article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="container about-grid">
+    <div class="about-photo" role="img" aria-label="Barbershop interior"></div>
+    <div class="about-text">
+      <div class="eyebrow">About Us</div>
+      <h2 class="section-title">MORE THAN A HAIRCUT.</h2>
+      <p>At PRINCE'S HAIR DOMAIN, we believe a great haircut is more than a look — it's a statement. Our goal is to help every client leave feeling confident and looking their best.</p>
+      <p>We combine professional skill, modern techniques and personal attention to deliver an exceptional grooming experience in a welcoming environment.</p>
+      <p>Step in, relax, and leave like royalty.</p>
+      <div class="signature">Prince</div>
+      <div class="eyebrow" style="margin-top:5px">Founder & Master Barber</div>
+    </div>
+  </div>
+</section>
+
+<section class="section gallery" id="gallery">
+  <div class="container">
+    <div class="center">
+      <div class="eyebrow">Our Work</div>
+      <h2 class="section-title">STYLE GALLERY</h2>
+      <p class="section-intro">A glimpse of the precision, creativity and detail we bring to every appointment.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item g1"></div><div class="gallery-item g2"></div><div class="gallery-item g3"></div>
+      <div class="gallery-item g4"></div><div class="gallery-item g5"></div><div class="gallery-item g6"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="booking">
+  <div class="container">
+    <div class="center">
+      <div class="eyebrow">Reserve Your Seat</div>
+      <h2 class="section-title">BOOK AN APPOINTMENT</h2>
+      <p class="section-intro">Choose your service and preferred time. We'll take care of the rest.</p>
+    </div>
+    <div class="booking-wrap">
+      <form class="booking-form" id="bookingForm">
+        <input required type="text" placeholder="Your Name">
+        <input required type="tel" placeholder="Phone Number">
+        <select required><option value="">Select Service</option><option>Classic Haircut</option><option>Skin Fade</option><option>Beard Trim</option><option>Hair Wash</option><option>Kids' Haircut</option><option>Hair Coloring</option></select>
+        <input required type="date">
+        <textarea class="full" rows="4" placeholder="Any special request? (Optional)"></textarea>
+        <button class="btn btn-primary full" type="submit">Book Now</button>
+      </form>
+      <div class="form-message" id="formMessage">Thank you! Your appointment request has been received. We will contact you to confirm your booking.</div>
+    </div>
+  </div>
+</section>
+
+<section class="section services" id="contact">
+  <div class="container contact-grid">
+    <div class="contact-card">
+      <div class="brand" style="margin-bottom:15px"><div class="logo">P</div><div><strong>PRINCE'S</strong><span>HAIR DOMAIN</span></div></div>
+      <p>More than a haircut. It's your identity.</p>
+    </div>
+    <div class="contact-card">
+      <h3>CONTACT US</h3>
+      <p>☎ <a href="tel:+233554050352">+233 55 405 0352</a></p>
+       <p>✉ <a href="mailto:princeshairdomain@gmail.com">princeshairdomain@gmail.com</a></p>
+       <p>💬 <a href="https://wa.me/233554050352" target="_blank" rel="noopener">WhatsApp Us</a></p>
+      <p>⌖ Location coming soon</p>
+    </div>
+    <div class="contact-card">
+      <h3>OPENING HOURS</h3>
+      <p>Monday – Friday: 9:00 AM – 8:00 PM</p>
+      <p>Saturday: 8:00 AM – 8:00 PM</p>
+      <p>Sunday: 10:00 AM – 6:00 PM</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container">© <span id="year"></span> PRINCE'S HAIR DOMAIN. All Rights Reserved.</div>
+</footer>
+
+<script>
+  const menuBtn=document.querySelector('.menu-btn');
+  const nav=document.getElementById('navlinks');
+  menuBtn.addEventListener('click',()=>nav.classList.toggle('show'));
+  document.querySelectorAll('nav a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('show')));
+  document.getElementById('year').textContent=new Date().getFullYear();
+  document.getElementById('bookingForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    document.getElementById('formMessage').style.display='block';
+    this.reset();
+    document.getElementById('formMessage').scrollIntoView({behavior:'smooth',block:'nearest'});
+  });
+</script>
+</body>
+</html>
