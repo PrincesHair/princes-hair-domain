@@ -85,7 +85,7 @@
   input:focus,select:focus,textarea:focus{border-color:var(--gold)}
   select option{background:#111}
   .full{grid-column:1/-1}
-  .form-message{margin-top:18px;display:none;padding:12px;border:1px solid var(--gold);color:var(--gold-light)}
+  .form-message{margin-top:18px;display:none;padding:16px;border:1px solid var(--gold);color:var(--gold-light);line-height:1.7}.form-message strong{font-size:1.05rem}
 
   /* Contact */
   .contact-grid{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:35px}
@@ -204,7 +204,6 @@
         <input type="hidden" name="access_key" value="04b1c311-a325-4125-884a-c3b18a2c93ef">
         <input type="hidden" name="subject" value="New Appointment Request - Prince's Hair Domain">
         <input type="hidden" name="from_name" value="Prince's Hair Domain Website">
-        <input type="hidden" name="redirect" value="https://princeshair.github.io/princes-hair-domain/#booking">
 
         <input required type="text" name="name" placeholder="Your Name">
         <input required type="tel" name="phone" placeholder="Phone Number">
@@ -221,7 +220,13 @@
         <textarea class="full" name="special_request" rows="4" placeholder="Any special request? (Optional)"></textarea>
         <button class="btn btn-primary full" type="submit">Book Now</button>
       </form>
-      <div class="form-message" id="formMessage">Thank you! Your appointment request has been received. We will contact you to confirm your booking.</div>
+      <div class="form-message" id="formMessage">
+        <strong>✓ Thank you!</strong><br>
+        Your appointment request has been received. We will contact you to confirm your booking.
+        <div id="whatsappWrap" style="display:none;margin-top:14px">
+          <a id="whatsappButton" class="btn btn-outline" href="#" target="_blank" rel="noopener">Send Booking to WhatsApp</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -259,8 +264,79 @@
   menuBtn.addEventListener('click',()=>nav.classList.toggle('show'));
   document.querySelectorAll('nav a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('show')));
   document.getElementById('year').textContent=new Date().getFullYear();
-  // Booking submissions are handled by Web3Forms.
-  // Do not add e.preventDefault() here, because the form must be allowed to submit.
+  // Booking submissions are handled by Web3Forms without leaving or jumping on the page.
+  const bookingForm = document.getElementById('bookingForm');
+  const formMessage = document.getElementById('formMessage');
+  const whatsappWrap = document.getElementById('whatsappWrap');
+  const whatsappButton = document.getElementById('whatsappButton');
+  const submitButton = bookingForm.querySelector('button[type="submit"]');
+  const dateInput = bookingForm.querySelector('input[name="date"]');
+
+  // Prevent customers from selecting a date in the past.
+  dateInput.min = new Date().toISOString().split('T')[0];
+
+  bookingForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const originalButtonText = submitButton.textContent;
+    submitButton.disabled = true;
+    submitButton.textContent = 'Sending...';
+    formMessage.style.display = 'none';
+    whatsappWrap.style.display = 'none';
+
+    try {
+      const response = await fetch(bookingForm.action, {
+        method: 'POST',
+        body: new FormData(bookingForm),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        const data = new FormData(bookingForm);
+        const name = data.get('name') || '';
+        const phone = data.get('phone') || '';
+        const service = data.get('service') || '';
+        const date = data.get('date') || '';
+        const specialRequest = data.get('special_request') || 'None';
+
+        const whatsappText =
+          "Hello Prince's Hair Domain, I just submitted a booking request.\n\n" +
+          "Name: " + name + "\n" +
+          "Phone: " + phone + "\n" +
+          "Service: " + service + "\n" +
+          "Date: " + date + "\n" +
+          "Special Request: " + specialRequest;
+
+        whatsappButton.href =
+          'https://wa.me/233554050352?text=' + encodeURIComponent(whatsappText);
+
+        bookingForm.reset();
+        dateInput.min = new Date().toISOString().split('T')[0];
+
+        formMessage.style.display = 'block';
+        whatsappWrap.style.display = 'block';
+
+        // Keep the user at the booking section instead of scrolling to the top.
+        document.getElementById('booking').scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      } else {
+        throw new Error(result.message || 'Unable to submit the booking.');
+      }
+    } catch (error) {
+      formMessage.innerHTML =
+        '<strong>Something went wrong.</strong><br>' +
+        'Your booking could not be submitted. Please try again or contact us directly.';
+      formMessage.style.display = 'block';
+      whatsappWrap.style.display = 'none';
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = originalButtonText;
+    }
+  });
 </script>
 </body>
 </html>
