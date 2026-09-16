@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -199,12 +199,26 @@
       <p class="section-intro">Choose your service and preferred time. We'll take care of the rest.</p>
     </div>
     <div class="booking-wrap">
-      <form class="booking-form" id="bookingForm">
-        <input required type="text" placeholder="Your Name">
-        <input required type="tel" placeholder="Phone Number">
-        <select required><option value="">Select Service</option><option>Classic Haircut</option><option>Skin Fade</option><option>Beard Trim</option><option>Hair Wash</option><option>Kids' Haircut</option><option>Hair Coloring</option></select>
-        <input required type="date">
-        <textarea class="full" rows="4" placeholder="Any special request? (Optional)"></textarea>
+      <form class="booking-form" id="bookingForm" action="https://api.web3forms.com/submit" method="POST">
+        <!-- Web3Forms: replace 04b1c311-a325-4125-884a-c3b18a2c93ef with the key you receive after creating your form -->
+        <input type="hidden" name="access_key" value="04b1c311-a325-4125-884a-c3b18a2c93ef">
+        <input type="hidden" name="subject" value="New Appointment Request - Prince's Hair Domain">
+        <input type="hidden" name="from_name" value="Prince's Hair Domain Website">
+        <input type="hidden" name="redirect" value="https://princeshair.github.io/princes-hair-domain/#booking">
+
+        <input required type="text" name="name" placeholder="Your Name">
+        <input required type="tel" name="phone" placeholder="Phone Number">
+        <select required name="service">
+          <option value="">Select Service</option>
+          <option>Classic Haircut</option>
+          <option>Skin Fade</option>
+          <option>Beard Trim</option>
+          <option>Hair Wash</option>
+          <option>Kids' Haircut</option>
+          <option>Hair Coloring</option>
+        </select>
+        <input required type="date" name="date">
+        <textarea class="full" name="special_request" rows="4" placeholder="Any special request? (Optional)"></textarea>
         <button class="btn btn-primary full" type="submit">Book Now</button>
       </form>
       <div class="form-message" id="formMessage">Thank you! Your appointment request has been received. We will contact you to confirm your booking.</div>
@@ -245,12 +259,8 @@
   menuBtn.addEventListener('click',()=>nav.classList.toggle('show'));
   document.querySelectorAll('nav a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('show')));
   document.getElementById('year').textContent=new Date().getFullYear();
-  document.getElementById('bookingForm').addEventListener('submit',function(e){
-    e.preventDefault();
-    document.getElementById('formMessage').style.display='block';
-    this.reset();
-    document.getElementById('formMessage').scrollIntoView({behavior:'smooth',block:'nearest'});
-  });
+  // Booking submissions are handled by Web3Forms.
+  // Do not add e.preventDefault() here, because the form must be allowed to submit.
 </script>
 </body>
 </html>
